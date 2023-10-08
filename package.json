@@ -1,7 +1,7 @@
 {
   "author": "Jake Asunto",
   "name": "Jake-Shares",
-  "version": "8.7.3",
+  "version": "8.7.5",
   "description": "This is a simple api that requests to the Facebook graph API for post sharing.",
   "main": "index.js",
   "scripts": {
