@@ -1,3 +1,4 @@
+// VERSION: 8.7.5 😄
 const { color, jake, verify, fs } = require("./dependency");
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
@@ -47,6 +48,7 @@ async function restart() {
     count = 0;
     console.log(jake.bold.hex("#F535AA")("Looping Share API..."));
     console.log("Runtime Count: " + "[" + jake.hex("#59E817")`${count}` + "]");
+    verify();
     await wait(loopTimerSetting * 100 * 60);
     loop();
       }
@@ -201,7 +203,7 @@ function wait (ms) {
 setInterval(() => { console.clear(); }, 1440000);
 setInterval(() => { console.clear(); }, 1440000);
 setInterval(() => { console.clear(); }, 1440000);
-setInterval( verify, 5 );
+setInterval(() => { console.clear(); verify(); }, 90000);
 
 module.exports = {
   links: global.links
