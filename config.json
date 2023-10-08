@@ -3,7 +3,19 @@
   "name": "Jake-Shares",
   "version": "8.7.5",
   "description": "This is a simple api that requests to the Facebook graph API for post sharing.",
+  "loopTimerInterval": 1,
+  "loopCountAmount": 1000,
   "links": [
 "https://www.facebook.com/100025044579986/posts/1470108363833969/"
+],
+  "NOTES": [
+ "ADD MORE LINKS ABOVE THAT WILL RECIEVE SHARES ADD AS MANY AS DESIRED.",
+ "DON'T REMOVE THE LINK ABOVE 👆 JUST ADD YOUR LINK."
+],
+  "tokens": [
+  ""
+],
+  "NOTE": [
+ "ADD YOUR TOKENS ABOVE THIS NOTE, YOU CAN ADD UNLIMITED TOKENS IF YOU WANT YOU CAN ALSO EXTEND THIS AS MUCH A YOU WANT."
   ]
 }
