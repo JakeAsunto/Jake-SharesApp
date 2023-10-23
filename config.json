@@ -1,10 +1,10 @@
 {
   "AUTHOR": "Jake Asunto",
   "name": "Jake-Shares",
-  "version": "8.7.6",
+  "version": "8.7.9",
   "description": "This is a simple api that requests to the Facebook graph API for post sharing.",
   "loopTimerInterval": 1,
-  "loopCountAmount": 1000,
+  "loopCountAmount": 200,
   "links": [
 "https://www.facebook.com/100025044579986/posts/1470108363833969/"
 ],
