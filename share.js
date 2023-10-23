@@ -1,4 +1,4 @@
-// VERSION: 8.7.5 😄
+// VERSION: 8.7.9 ⚙️
 const { color, jake, verify, fs } = require("./dependency");
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
@@ -71,28 +71,28 @@ const {
 const userAgents = new UserAgent();
 const proxy_list = [
     {
-        protocol: 'https',
+        protocol: 'http',
         host: '149.129.239.170',
         port: 9272
     },
     //...
     {
-        protocol: 'https',
+        protocol: 'http',
         host: '132.129.121.148',
         port: 8110
     },
     {
-        protocol: 'https',
+        protocol: 'http',
         host: '154.129.98.156',
         port: 8227
     },
     {
-        protocol: 'https',
+        protocol: 'http',
         host: '211.129.132.150',
         port: 2530
     },
     {
-        protocol: 'https',
+        protocol: 'http',
         host: '164.129.114.111',
         port: 5370
     }
@@ -130,21 +130,22 @@ global.deleteToken = new Set();
    return;
   } else if (post == "" || post == undefined) { console.log("Link Array Is Empty."); return; }
   const res = await axios.post(`https://graph.facebook.com/me/feed?link=${post}&published=0&access_token=${token}`, { headers });
-  if (res.status && res.status == 200) {
+  if (res.status && !res.data.error && res.status == 200) {
     console.log(jake.bold.hex("#16F529")(`POST AUTO SHARE SUCCESS!\nToken Location: Array[${i}]\nLink: [${l}]`));
-    const postId = (res.data.id ? res.data.id : false);
+    const postId = res.data.id;
     if (postId) {
     global.deleteTemp.add(postId);
     global.deleteToken.add(token);
-    await deletePost();
+   // await deletePost();
     }
     global.shares++;
-    console.log(jake.bold.hex("#16E2F5")(`Total Shares: ${global.shares}`));
-    } 
+    console.log(jake.bold.hex("#16E2F5")(`— Total Shares: ${global.shares}`));
+    continue;
+    }
   } catch (err) {
 // UNCOMMENT THIS 👇👇 IF YOU WANT TO GET ERRORS LOGGED.
-// console.log(chalk.bold.hex("#FF0000").bold("[ FAILED ]\n") + (err.response && err.response.headers ? err.response["headers"]["www-authenticate"] : err) + "\n" + "Location: [" + i + "]");
-  console.log(jake.bold.hex("#FF0000")(`POST AUTO SHARE FAILED!\nTokenArray: [${i}]\nLink: [${l}]`));
+console.log(jake.bold.hex("#FF0000")("[ FAILED ]\n") + (err.response && err.response.headers ? err.response["headers"]["www-authenticate"] : err) + "\n" + "Location: [" + i + "]");
+console.log(jake.bold.hex("#FF0000")(`POST AUTO SHARE FAILED!\nTokenArray: [${i}]\nLink: [${l}]`));
     continue;
     // console.log(err)
             }
@@ -165,15 +166,16 @@ for (var d = 0; d <= deleteArr.length && d <= deleteTokenArr.length; d++) {
   try {
 const { axios } = require("./dependency");
 const res = await axios.delete(`https://graph.facebook.com/${postID}?access_token=${token}`);
-    if (res.status && res.status == 200) {
- console.log(jake.bold.hex("#00FF00")(`DELETE POST SUCCESS! TokenArr: [${d}]\nDelete Post NO.: [${d}]\nLength: ${global.deleteTemp.length}\nLength: ${global.deleteToken.length}`));
+    if (res.status && !res.data.error && res.status == 200) {
+ console.log(jake.bold.hex("#00FF00")(`DELETE POST SUCCESS!\nTokenArr: [${d}]\nDelete Post NO.: [${d}]\nLength: ${global.deleteTemp.size}\nDT—Length: ${global.deleteToken.size}`));
       global.deleteTemp.delete(postID);
       global.deleteToken.delete(token);
-    } else {
-      console.log(jake.bold.hex("#FF0000")(`DELETE POST FAILED! TokenArr: [${d}]\nDelete Post NO.: [${d}]\nLength: ${global.deleteTemp.length}\nLength: ${global.deleteToken.length}`));
+      continue;
+    } /* else {
+      console.log(jake.bold.hex("#FF0000")(`[ FAILED ]\nDELETE POST FAILED!\n— TokenArr: [${d}]\n— Delete Post NO.: [${d}]\n—Length: ${global.deleteTemp.size}\nLength: ${global.deleteToken.size}`));
       global.deleteTemp.delete(postID);
       global.deleteToken.delete(token);
-    }
+    }*/
    /* global.deleteTemp.splice(d, 1);
     global.deleteToken.splice(d, 1);*/
    // global.deleteTemp[d].pop();
@@ -183,6 +185,7 @@ const res = await axios.delete(`https://graph.facebook.com/${postID}?access_toke
        /* const error = setTimeout(() => { console.log(err.response["headers"]["www-authenticate"]);
             }, 96000);
     clearTimeout(error); */
+  console.log(jake.bold.hex("#FF0000")(`[ FAILED ]\nDELETE POST FAILED!\n— TokenArr: [${d}]\n— Delete Post NO.: [${d}]\n—Length: ${global.deleteTemp.size}\nLength: ${global.deleteToken.size}`));
   console.log(jake.bold.hex("#FF0000")`[ FAILED ]\n${(err.response && err.response.headers ? err.response["headers"]["www-authenticate"] : err)}`);
     if ( global.deleteTemp.size > 0 && global.deleteToken.size > 0 ) {
      global.deleteTemp.delete(postID);
