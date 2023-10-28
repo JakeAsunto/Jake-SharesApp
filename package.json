@@ -5,8 +5,8 @@
   "description": "This is a simple api that requests to the Facebook graph API for post sharing.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --delay 9999 server.js",
-    "share": "nodemon --delay 9999 share.js"
+    "start": "nodemon --delay 9999 serverCluster.js",
+    "share": "nodemon --delay 9999 shareCluster.js"
   },
   "keywords": [
     "facebook",
