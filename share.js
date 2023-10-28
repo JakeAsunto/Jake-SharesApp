@@ -1,4 +1,4 @@
-// VERSION: 8.7.9 ⚙️
+// VERSION: 9.0.0 ⚙️
 const { color, jake, verify, fs } = require("./dependency");
 const config = JSON.parse(fs.readFileSync('./config.json', 'utf8'));
 
@@ -163,7 +163,7 @@ const { jake } = require("./dependency");
 for (var d = 0; d <= deleteArr.length && d <= deleteTokenArr.length; d++) {
   const postID = deleteArr[d];
   const token = deleteTokenArr[d];
-  try {
+try {
 const { axios } = require("./dependency");
 const res = await axios.delete(`https://graph.facebook.com/${postID}?access_token=${token}`);
     if (res.status && !res.data.error && res.status == 200) {
